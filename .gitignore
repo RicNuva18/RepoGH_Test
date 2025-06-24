@@ -1,0 +1,43 @@
+# Archivos y carpetas de compilación
+bin/
+obj/
+
+# Archivos generados por test
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# Paquetes NuGet descargados
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+
+# VS Code settings
+.vscode/
+
+# VS / JetBrains IDE settings
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.idea/
+*.DS_Store
+
+# Archivos temporales
+*.log
+*.tmp
+
+# Resultados de test JUnit
+*.xml
+
+# Archivos de configuración secreta/local
+appsettings.*.json
+secrets.json
+
+# Archivos del sistema operativo
+Thumbs.db
+ehthumbs.db
+.DS_Store
+desktop.ini
