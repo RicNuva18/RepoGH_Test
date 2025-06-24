@@ -18,22 +18,10 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - uses: actions/cache@v4
+      - name: 🔁 Ejecutar acción personalizada de build
+        uses: ./.github/actions/build-dotnet
         with:
-          path: ~/.nuget/packages
-          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
-
-      - uses: actions/cache@v4
-        with:
-          path: |
-            **/bin/
-            **/obj/
-          key: build-${{ runner.os }}-${{ github.sha }}
-          restore-keys: |
-            build-${{ runner.os }}-
-
-      - run: dotnet restore
-      - run: dotnet build --no-restore --configuration Release
+          configuration: Release
 
   test:
     name: 🧪 Test + Report

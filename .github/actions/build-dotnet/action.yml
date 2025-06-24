@@ -1,0 +1,34 @@
+name: Build .NET Project
+description: Restaura, cachea y compila proyectos .NET
+inputs:
+  configuration:
+    description: Build configuration (Debug/Release)
+    required: false
+    default: Release
+
+runs:
+  using: composite
+  steps:
+    - name: 💾 Cache de paquetes NuGet
+      uses: actions/cache@v4
+      with:
+        path: ~/.nuget/packages
+        key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
+
+    - name: 💾 Cache bin/obj
+      uses: actions/cache@v4
+      with:
+        path: |
+          **/bin/
+          **/obj/
+        key: build-${{ runner.os }}-${{ github.sha }}
+        restore-keys: |
+          build-${{ runner.os }}-
+
+    - name: 📦 Restaurar dependencias
+      shell: bash
+      run: dotnet restore
+
+    - name: 🔧 Compilar solución
+      shell: bash
+      run: dotnet build --no-restore --configuration ${{ inputs.configuration }}
